@@ -1,0 +1,65 @@
+<div class="TEXTAREA flex gap-7 justify-center items-center">
+  <textarea
+    class="resize-none border broder-solid rounded-xl p-2.5"
+    placeholder="შეიყვანეთ დასაშიფრი ტექსტი"
+    name="input"
+    id="input"
+    cols="60"
+    [(ngModel)]="inputData"
+    rows="7"
+  ></textarea>
+  <textarea
+    class="resize-none border broder-solid rounded-xl p-2.5 read-only:bg-slate-200"
+    name="output"
+    id="output"
+    cols="60"
+    [(ngModel)]="outputData"
+    rows="7"
+    readonly
+  ></textarea>
+</div>
+<div class="BUTTONS flex gap-[88px] justify-center items-center mt-2.5 mb-3">
+  <div class="mt-2">
+    <label for="types" class="font-roboto"> აირჩიეთ კრიპტოგრაფიის ტიპი: </label>
+    <select
+      name="types"
+      id="types"
+      class="border border-solid ml-3 w-[150px] pl-1"
+      [(ngModel)]="selectedOption"
+    >
+      <option *ngFor="let item of types" [value]="item">
+        {{ item }}
+      </option>
+    </select>
+  </div>
+  <input
+    type="text"
+    [(ngModel)]="password"
+    placeholder=" შეიყვანეთ პაროლი"
+    class="border border-solid pl-1 ml-3 h-[38px]"
+  />
+  <button
+    class="border border-solid bg-cyan-600 py-1.5 px-5 min-w-[200px] rounded-2xl text-white font-roboto font-bold hover:bg-cyan-600/75"
+    (click)="onEncrypt()"
+  >
+    დაშიფვრა
+  </button>
+</div>
+<p class="p-4 bg-gray-50 mx-2 text-sm" *ngIf="selectedOption === 'AES'">
+  <strong>განვითარებული შიფრაციის სტანდარტი</strong> (Advanced Encryption
+  Standard ან AES) — სიმეტრიული შიფრაციის ალგორითმი, ამორჩეული 2000 წლის
+  ოქტომბერში NIST-ის მიერ ამერიკის შეერთებული შტატების მთავრობის ორგანიზაციების
+  ახალი სტანდარტული შიფრაციისათვის.ალგორითმი იღებს დასაწყისში 128 ბიტიან (16
+  ბაიტი) ბლოკს, გასაღები მოიცავს 128, 192 ან 256 ბიტს. დასაწყისის 16 ბაიტი არის
+  გადაადგილებული წინასწარ განსაზღვრული ცხრილის მიხედვით. ეს ბაიტები
+  განთავსებულია 4*4 ელემენტიან მატრიცაში და მისი ხაზები ექვემდებქრება როტაციას
+  მარჯვნივ. ინკრემენტი როტაციისთვის იცვლება მისი ხაზის ნომრის მიხედვით. შემდეგ
+  მატრიცაზე გამოყენებულია წრფივი გარდაქმნა, ის მოიცავს მატრიცის თვითვეული
+  ელემენტის ორობით ნამრავლს დამხმარე მატრიციდან გამომდინარე პოლინომებით, ეს
+  ნამრავლი დაფუძნებულია სპეციალურ წესებზე GF(2^8) მიხედვით (Galois-ის ჯგუფი ან
+  სრული ტანი). წრფივი გარდაქმნა გიქმნის საუკეთესო გარემოს (ბიტების გავრცელება
+  სტრუქტურაში) მრავალ ჯერზე. საბოლოოდდ, XOR ორ მარტიცას შორის საშუალებას გაძლევს
+  მიიღო დამატებითი მატრიცა. ეს განსხვავებული ოპერაციები გამეორებულია მრავალჯერ
+  და განსაზღვრავენ "ჯერს". 128, 192 ან 256-იანი გასაღებისთვის AES საჭიროებს 10,
+  12 ან 14 ჯერს.
+</p>
