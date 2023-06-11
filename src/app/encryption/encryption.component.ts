@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as CryptoJS from 'crypto-js';
 
 @Component({
@@ -58,5 +58,15 @@ export class EncryptionComponent implements OnInit {
         console.log(this.selectedOption);
         break;
     }
+  }
+  onCopy() {
+    navigator.clipboard
+      .writeText(this.outputData)
+      .then(() => {
+        console.log('Text copied to clipboard');
+      })
+      .catch((error) => {
+        console.error('Error copying text to clipboard:', error);
+      });
   }
 }

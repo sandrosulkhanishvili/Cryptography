@@ -69,4 +69,14 @@ export class DecryptionComponent implements OnInit {
         break;
     }
   }
+  onCopy() {
+    navigator.clipboard
+      .writeText(this.outputData)
+      .then(() => {
+        console.log('Text copied to clipboard');
+      })
+      .catch((error) => {
+        console.error('Error copying text to clipboard:', error);
+      });
+  }
 }

@@ -49,7 +49,7 @@
     <ul class="flex items-center gap-3 bg-gray-300 rounded-xl p-1.5">
       <li
         class="rounded-xl p-0.5 flex items-center gap-0.5"
-        [ngClass]="{ 'bg-cyan-400/75': activeView === 'encryption' }"
+        [ngClass]="{ 'bg-cyan-600/75': activeView === 'encryption' }"
         (click)="activeView = 'encryption'"
       >
         <svg
@@ -71,7 +71,7 @@
       </li>
       <li
         class="rounded-xl p-0.5 flex items-center gap-0.5"
-        [ngClass]="{ 'bg-red-300/75': activeView === 'decryption' }"
+        [ngClass]="{ 'bg-red-500/75': activeView === 'decryption' }"
         (click)="activeView = 'decryption'"
       >
         <svg
@@ -97,7 +97,5 @@
   <app-decryption *ngIf="activeView === 'decryption'"></app-decryption>
 </div>
 
-<!-- TODO description for cryptography methods -->
 <!-- TODO Last encryption/decryption method -->
-<!-- TODO formcontrolis damateba da am inputis parolad damateba -->
-<!-- TODO damatebiti informacia sxvadasxva tipebze -->
+<!-- TODO ALERT -->
