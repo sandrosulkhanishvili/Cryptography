@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as CryptoJS from 'crypto-js';
+import { ADFGVXCipher } from '../utils/adfgvx-cipher';
 
 @Component({
   selector: 'app-encryption',
@@ -7,23 +8,20 @@ import * as CryptoJS from 'crypto-js';
   styleUrls: ['./encryption.component.scss'],
 })
 export class EncryptionComponent implements OnInit {
-  public selectedOption:
-    | 'AES'
-    | 'DES'
-    | 'Triple DES'
-    | 'Rabbit'
-    | 'RC4'
-    | 'Option5' = 'AES';
+  public selectedOption: 'AES' | 'DES' | 'Triple DES' | 'Rabbit' | 'RC4' =
+    'AES';
+  //| 'ADFGVXC'
   public inputData: string = null;
   public password: string = null;
   public outputData: any = null;
+  public ADFGVXC = new ADFGVXCipher(this.password, 'playfair');
   public types: string[] = [
     'AES',
     'DES',
     'Triple DES',
     'Rabbit',
     'RC4',
-    'Option5',
+    // 'ADFGVXC',
   ];
 
   constructor() {}
@@ -31,6 +29,11 @@ export class EncryptionComponent implements OnInit {
   ngOnInit(): void {}
 
   onEncrypt() {
+    console.log(this.password);
+    if (this.password === null) {
+      alert('შეიყვანეთ გასაღები');
+      console.log(this.password);
+    }
     switch (this.selectedOption) {
       case 'AES':
         this.outputData = CryptoJS.AES.encrypt(this.inputData, this.password);
@@ -53,20 +56,24 @@ export class EncryptionComponent implements OnInit {
       case 'RC4':
         this.outputData = CryptoJS.RC4.encrypt(this.inputData, this.password);
         break;
-      case 'Option5':
-        console.log(this.selectedOption);
-        console.log(this.selectedOption);
-        break;
+      // case 'ADFGVXC':
+      //   this.outputData = this.ADFGVXC.encrypt(this.inputData);
+      //   break;
     }
   }
   onCopy() {
     navigator.clipboard
       .writeText(this.outputData)
       .then(() => {
-        console.log('Text copied to clipboard');
+        // console.log('Text copied to clipboard');
       })
       .catch((error) => {
         console.error('Error copying text to clipboard:', error);
       });
+  }
+  formReset() {
+    this.inputData = null;
+    this.outputData = null;
+    this.password = null;
   }
 }

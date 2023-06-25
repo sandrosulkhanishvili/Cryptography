@@ -7,13 +7,9 @@ import * as CryptoJS from 'crypto-js';
   styleUrls: ['./decryption.component.scss'],
 })
 export class DecryptionComponent implements OnInit {
-  public selectedOption:
-    | 'AES'
-    | 'DES'
-    | 'Triple DES'
-    | 'Rabbit'
-    | 'RC4'
-    | 'Option5' = 'AES';
+  public selectedOption: 'AES' | 'DES' | 'Triple DES' | 'Rabbit' | 'RC4' =
+    'AES';
+  // | 'Option5'
   public inputData: string = '';
   public password: string = null;
   public outputData: any = '';
@@ -23,7 +19,7 @@ export class DecryptionComponent implements OnInit {
     'Triple DES',
     'Rabbit',
     'RC4',
-    'Option5',
+    // 'Option5',
   ];
 
   constructor() {}
@@ -63,20 +59,25 @@ export class DecryptionComponent implements OnInit {
           this.password
         ).toString(CryptoJS.enc.Utf8);
         break;
-      case 'Option5':
-        console.log(this.selectedOption);
-        console.log(this.selectedOption);
-        break;
+      // case 'Option5':
+      //   console.log(this.selectedOption);
+      //   console.log(this.selectedOption);
+      //   break;
     }
   }
   onCopy() {
     navigator.clipboard
       .writeText(this.outputData)
       .then(() => {
-        console.log('Text copied to clipboard');
+        // console.log('Text copied to clipboard');
       })
       .catch((error) => {
         console.error('Error copying text to clipboard:', error);
       });
+  }
+  formReset() {
+    this.inputData = null;
+    this.outputData = null;
+    this.password = null;
   }
 }

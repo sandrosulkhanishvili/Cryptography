@@ -6,6 +6,8 @@
     id="input"
     cols="60"
     [(ngModel)]="inputData"
+    required
+    #textArea="ngModel"
     rows="7"
   ></textarea>
   <div class="relative">
@@ -42,12 +44,13 @@
   </div>
 </div>
 <div class="BUTTONS flex gap-[88px] items-center justify-center mt-2.5 mb-3">
-  <div class="mt-2">
+  <div class="mt-2 flex items-center">
     <label for="types" class="font-roboto"> აირჩიეთ კრიპტოგრაფიის ტიპი: </label>
     <select
       name="types"
       id="types"
       class="border border-solid ml-3 w-[150px] pl-1"
+      (change)="formReset()"
       [(ngModel)]="selectedOption"
     >
       <option *ngFor="let item of types" [value]="item">
@@ -62,12 +65,13 @@
     required
     #key="ngModel"
     class="border border-solid pl-1 ml-3 h-[38px]"
-    [ngClass]="{ 'border-red-600': !key.valid && key.touched }"
   />
+  <!-- [ngClass]="{ 'border-red-600': !key.valid && key.touched }" -->
 
   <button
-    class="border border-solid bg-red-500 py-1.5 px-5 min-w-[200px] rounded-2xl text-white font-roboto font-bold hover:bg-red-500/75"
-    [disabled]="!key.valid"
+    class="border border-solid bg-red-500 cursor-pointer py-1.5 px-5 min-w-[200px] rounded-2xl text-white font-roboto font-bold hover:bg-red-500/75"
+    [disabled]="!key.valid || !textArea.valid"
+    [ngClass]="{ disabled: !key.valid || !textArea.valid }"
     (click)="onDecrypt()"
   >
     გაშიფრვა
